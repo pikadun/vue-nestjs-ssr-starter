@@ -1,5 +1,9 @@
 <template>
-  <v-app>
+  <ConfigProvider>
     <router-view />
-  </v-app>
+  </ConfigProvider>
 </template>
+
+<script setup lang="ts">
+import { ConfigProvider } from "reka-ui";
+</script>

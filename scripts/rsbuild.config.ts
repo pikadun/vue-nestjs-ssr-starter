@@ -1,6 +1,6 @@
 import { defineConfig, type EnvironmentConfig } from "@rsbuild/core";
-import { pluginVue } from "@rsbuild/plugin-vue";
-import { VuetifyPlugin } from "webpack-plugin-vuetify";
+import { pluginVue as PluginVue } from "@rsbuild/plugin-vue";
+import UnoCSS from "@unocss/postcss";
 import pkg from "../package.json" with { type: "json" };
 import {
     ASSET_PREFIX,
@@ -16,6 +16,7 @@ import {
     SERVER_ENVIRONMENT_NAME,
     STATIC_NAME,
 } from "./constant.ts";
+import unoConfig from "./uno.config.ts";
 
 const isDev = process.env.NODE_ENV === "production" ? false : true;
 
@@ -50,6 +51,9 @@ const clientConfig: EnvironmentConfig = {
         },
     },
 };
+
+const pluginUnoCss = UnoCSS({ configOrPath: unoConfig });
+const pluginVue = PluginVue();
 
 export default defineConfig({
     root: ROOT_DIR,
@@ -87,8 +91,12 @@ export default defineConfig({
             watchOptions: {
                 aggregateTimeout: 50,
             },
-            plugins: [new VuetifyPlugin({})],
+        },
+        postcss: {
+            postcssOptions: {
+                plugins: [pluginUnoCss],
+            },
         },
     },
-    plugins: [pluginVue()],
+    plugins: [pluginVue],
 });

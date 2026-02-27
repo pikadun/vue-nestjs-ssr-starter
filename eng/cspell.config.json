@@ -18,9 +18,11 @@
     "outdir",
     "outfile",
     "pikadun",
+    "reka",
     "rsbuild",
     "rspack",
     "subtests",
+    "unocss",
     "vuetify"
   ]
 }
