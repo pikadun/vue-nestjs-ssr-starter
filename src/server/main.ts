@@ -10,7 +10,11 @@ const logger = new Logger("Main");
 let app: NestFastifyApplication;
 
 export const bootstrap: Application["bootstrap"] = async () => {
-    app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+    app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({
+        routerOptions: {
+            ignoreTrailingSlash: true,
+        },
+    }));
 
     // Set global prefix for all routes, exclude the ssr route
     app.setGlobalPrefix(config.basePath, { exclude: ["\\*"] });

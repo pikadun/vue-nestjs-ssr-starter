@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { renderToString } from "vue/server-renderer";
 import { config } from "../../config";
 import { createApp } from "@client/ssr";
-import { RouteName } from "@shared/constant";
+import { AppRouteName } from "@shared/routes";
 import path from "node:path";
 import { HTML_PLACEHOLDER_BASE, HTML_PLACEHOLDER_CONTENT } from "../../constant";
 
@@ -12,9 +12,10 @@ export class SsrService {
         const { app, router } = createApp({ basePath: config.basePath });
         const location = router.resolve(url);
 
-        if (location.name === RouteName.CatchAll) {
+        if (location.name === AppRouteName.CatchAll) {
             return null;
         }
+
         await router.push(url);
         await router.isReady();
 

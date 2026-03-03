@@ -1,7 +1,9 @@
-import { Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Delete, Get, Param, Post } from "@nestjs/common";
 import { TodoService } from "./todo.service";
+import { TodoCreateDto, TodoIdParamDto } from "./todo.dto";
+import { ApiController } from "../../common/decorators/api-controller.decorator";
 
-@Controller("todo")
+@ApiController("todo")
 export class TodoController {
     constructor(private readonly service: TodoService) { }
 
@@ -11,12 +13,12 @@ export class TodoController {
     }
 
     @Delete("/:id")
-    async delete(@Param("id") id: number) {
+    async delete(@Param() { id }: TodoIdParamDto) {
         return this.service.delete(id);
     }
 
     @Post("/")
-    async create(@Param("title") title: string) {
+    async create(@Body() { title }: TodoCreateDto) {
         return this.service.create(title);
     }
 }

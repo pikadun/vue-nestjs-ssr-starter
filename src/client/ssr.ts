@@ -1,4 +1,6 @@
 import { createSSRApp } from "vue";
+import { Config as PrimeVue } from "primevue";
+import Aura from "@primeuix/themes/aura";
 import AppComponent from "./App.vue";
 import { createAppRouter, type CreateAppRouterOptions } from "./router";
 
@@ -9,6 +11,11 @@ export const createApp = (options: CreateAppOptions) => {
     const router = createAppRouter(options);
 
     app.use(router);
+    app.use(PrimeVue, {
+        theme: {
+            preset: Aura,
+        },
+    });
 
     return { app, router };
 };

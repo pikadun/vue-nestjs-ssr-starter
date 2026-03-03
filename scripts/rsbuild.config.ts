@@ -1,9 +1,12 @@
 import { defineConfig, type EnvironmentConfig } from "@rsbuild/core";
 import { pluginVue as PluginVue } from "@rsbuild/plugin-vue";
-import UnoCSS from "@unocss/postcss";
+import PluginAutoImport from "unplugin-vue-components/rspack";
+import { PrimeVueResolver } from "@primevue/auto-import-resolver";
+
 import pkg from "../package.json" with { type: "json" };
 import {
     ASSET_PREFIX,
+    AUTO_IMPORT_DTS_PATH,
     CLIENT_ENTRY_NAME,
     CLIENT_ENTRY_PATH,
     CLIENT_ENVIRONMENT_NAME,
@@ -16,7 +19,6 @@ import {
     SERVER_ENVIRONMENT_NAME,
     STATIC_NAME,
 } from "./constant.ts";
-import unoConfig from "./uno.config.ts";
 
 const isDev = process.env.NODE_ENV === "production" ? false : true;
 
@@ -52,8 +54,12 @@ const clientConfig: EnvironmentConfig = {
     },
 };
 
-const pluginUnoCss = UnoCSS({ configOrPath: unoConfig });
 const pluginVue = PluginVue();
+const primeVueResolver = PrimeVueResolver();
+const pluginAutoImport = PluginAutoImport({
+    resolvers: [primeVueResolver],
+    dts: AUTO_IMPORT_DTS_PATH,
+});
 
 export default defineConfig({
     root: ROOT_DIR,
@@ -91,11 +97,7 @@ export default defineConfig({
             watchOptions: {
                 aggregateTimeout: 50,
             },
-        },
-        postcss: {
-            postcssOptions: {
-                plugins: [pluginUnoCss],
-            },
+            plugins: [pluginAutoImport],
         },
     },
     plugins: [pluginVue],

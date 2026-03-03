@@ -1,9 +1,7 @@
 import { type Config, ProductionConfig } from "./production.config";
 import { DevelopmentConfig } from "./development.config";
 import { AppEnv } from "../utils/env";
-import Deepmerge from "@fastify/deepmerge";
-
-const deepmerge = Deepmerge();
+import deepmerge from "deepmerge";
 
 let config = ProductionConfig;
 

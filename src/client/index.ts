@@ -1,4 +1,3 @@
-import "./index.css";
 import { createApp } from "./ssr";
 
 const baseElement = document.querySelector("base");

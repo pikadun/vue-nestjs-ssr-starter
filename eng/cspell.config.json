@@ -5,24 +5,27 @@
   },
   "useGitignore": true,
   "ignorePaths": [
-    "**/*.css"
+    "**/*.css",
+    "**/*.d.ts",
+    "**/*.svg"
   ],
   "words": [
     "camaro",
     "commitlint",
     "commitlintrc",
     "endregion",
+    "FOUC",
     "linebreak",
     "lintstagedrc",
     "nosources",
     "outdir",
     "outfile",
     "pikadun",
+    "primeuix",
+    "primevue",
     "reka",
     "rsbuild",
     "rspack",
-    "subtests",
-    "unocss",
-    "vuetify"
+    "subtests"
   ]
 }
