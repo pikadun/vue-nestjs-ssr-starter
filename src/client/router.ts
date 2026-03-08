@@ -1,19 +1,17 @@
 import { createRouter, createWebHistory, createMemoryHistory } from "vue-router";
-import type { RouteRecordSingleView, Router } from "vue-router";
+import type { RouteRecordRaw, Router } from "vue-router";
 import { AppRouteName, APP_ROUTES } from "@shared/routes";
 
-const components: Record<AppRouteName, () => Promise<unknown>> = {
+const componentMap: Record<Exclude<AppRouteName, AppRouteName.CatchAll>, () => Promise<unknown>> = {
     [AppRouteName.Home]: () => import("./views/Homepage.vue"),
     [AppRouteName.Todo]: () => import("./views/Todo.vue"),
-    // TODO: add 404 page
-    [AppRouteName.CatchAll]: () => Promise.resolve(),
 };
 
-const routes = APP_ROUTES.map<RouteRecordSingleView>(route => ({
-    path: route.path,
-    name: route.name,
-    component: components[route.name],
-}));
+const routes = APP_ROUTES.map<RouteRecordRaw>((route) => {
+    return route.name === AppRouteName.CatchAll
+        ? { ...route, redirect: { name: AppRouteName.Home } }
+        : { ...route, component: componentMap[route.name] };
+});
 
 export interface CreateAppRouterOptions {
     isBrowser?: boolean;

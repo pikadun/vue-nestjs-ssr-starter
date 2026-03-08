@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
-import { DatabaseModule } from "./core/database/database.module";
-import { TodoModule } from "./modules/todo/todo.module";
-import { SsrModule } from "./modules/ssr/ssr.module";
 import { APP_PIPE } from "@nestjs/core";
 import { ZodValidationPipe } from "nestjs-zod";
+import { DatabaseModule } from "./core/database/database.module";
+import { TodoModule } from "./modules/todo/todo.module";
+import { AppController } from "./app.controller";
 
 @Module({
     imports: [
@@ -11,10 +11,9 @@ import { ZodValidationPipe } from "nestjs-zod";
 
         // Import feature modules here
         TodoModule,
-
-        // SSR module should be the last one to be imported, as it has a wildcard route that matches all requests
-        SsrModule,
     ],
+    // AppController has a wildcard route, so it must be registered last
+    controllers: [AppController],
     providers: [
         {
             provide: APP_PIPE,
@@ -22,4 +21,4 @@ import { ZodValidationPipe } from "nestjs-zod";
         },
     ],
 })
-export class AppModule { }
+export class AppModule {}
