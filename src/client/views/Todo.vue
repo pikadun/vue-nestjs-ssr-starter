@@ -62,8 +62,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { Card, InputText, Message, ProgressSpinner, Button, Checkbox } from "primevue";
+import { SSR_DATA_KEY } from "@shared/ssr-data";
+import { computed, inject, onMounted, ref } from "vue";
 
 defineOptions({
     name: "TodoView",
@@ -77,24 +77,8 @@ interface TodoItem {
 
 type AnyObject = Record<string, unknown>;
 
-const todos = ref<TodoItem[]>([]);
-const draftTitle = ref("");
-const isLoading = ref(false);
-const isCreating = ref(false);
-const deletingId = ref<number | null>(null);
-const errorMessage = ref("");
-
-const isCreateDisabled = computed(() => {
-    return isCreating.value || draftTitle.value.trim().length === 0;
-});
-
 const isObject = (value: unknown): value is AnyObject => {
     return typeof value === "object" && value !== null;
-};
-
-const getApiUrl = (path: string): string => {
-    const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
-    return normalizedPath;
 };
 
 const unwrapData = (value: unknown): unknown => {
@@ -122,6 +106,24 @@ const parseTodoList = (value: unknown): TodoItem[] => {
         return [];
     }
     return data.map(toTodoItem).filter((item): item is TodoItem => item !== null);
+};
+
+const ssrData = inject(SSR_DATA_KEY, undefined);
+
+const todos = ref<TodoItem[]>(parseTodoList(ssrData));
+const draftTitle = ref("");
+const isLoading = ref(false);
+const isCreating = ref(false);
+const deletingId = ref<number | null>(null);
+const errorMessage = ref("");
+
+const isCreateDisabled = computed(() => {
+    return isCreating.value || draftTitle.value.trim().length === 0;
+});
+
+const getApiUrl = (path: string): string => {
+    const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+    return normalizedPath;
 };
 
 const fetchTodos = async () => {
@@ -201,6 +203,8 @@ const handleDelete = async (id: number) => {
 };
 
 onMounted(() => {
-    void fetchTodos();
+    if (ssrData === undefined) {
+        void fetchTodos();
+    }
 });
 </script>

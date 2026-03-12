@@ -1,9 +1,10 @@
 import { Module } from "@nestjs/common";
 import { APP_PIPE } from "@nestjs/core";
 import { ZodValidationPipe } from "nestjs-zod";
+
+import { AppController } from "./app.controller";
 import { DatabaseModule } from "./core/database/database.module";
 import { TodoModule } from "./modules/todo/todo.module";
-import { AppController } from "./app.controller";
 
 @Module({
     imports: [

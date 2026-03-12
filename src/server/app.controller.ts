@@ -1,4 +1,5 @@
-import { All, Get, Controller } from "@nestjs/common";
+import { All, Controller, Get } from "@nestjs/common";
+
 import { Page } from "./common/decorators/page.decorator";
 
 @Controller()

@@ -1,6 +1,6 @@
-import { createZodDto } from "nestjs-zod";
-import { createTodoSchema } from "@shared/schemas/todo.schema";
 import { idParamSchema } from "@shared/schemas/base.schema";
+import { createTodoSchema } from "@shared/schemas/todo.schema";
+import { createZodDto } from "nestjs-zod";
 
 export class TodoIdParamDto extends createZodDto(idParamSchema) { }
 

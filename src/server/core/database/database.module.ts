@@ -1,5 +1,5 @@
 import { type DynamicModule, Global, Logger, Module, type Provider } from "@nestjs/common";
-import { Sequelize, type Options, type ModelStatic, Model } from "@sequelize/core";
+import { Model, type ModelStatic, type Options, Sequelize } from "@sequelize/core";
 import { SqliteDialect } from "@sequelize/sqlite3";
 
 export const SEQUELIZE_PROVIDER = Symbol("SEQUELIZE_PROVIDER");

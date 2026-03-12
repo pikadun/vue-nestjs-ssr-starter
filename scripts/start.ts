@@ -1,8 +1,10 @@
-import { createRsbuild, type Rspack, type OnAfterDevCompileFn } from "@rsbuild/core";
-import rsbuildConfig from "./rsbuild.config.ts";
-import { CLIENT_SOURCE_DIR, SERVER_ENTRY_NAME, SERVER_ENVIRONMENT_NAME } from "./constant.ts";
 import crypto from "node:crypto";
 import { type Socket } from "node:net";
+
+import { createRsbuild, type OnAfterDevCompileFn, type Rspack } from "@rsbuild/core";
+
+import { CLIENT_SOURCE_DIR, SERVER_ENTRY_NAME, SERVER_ENVIRONMENT_NAME } from "./constant.ts";
+import rsbuildConfig from "./rsbuild.config.ts";
 
 const rsbuild = await createRsbuild({ rsbuildConfig });
 const devServer = await rsbuild.createDevServer();

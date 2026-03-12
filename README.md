@@ -1,6 +1,6 @@
-# Web Template
+# vue-nestjs-ssr-starter
 
-A lightweight SSR template for Vue 3 + NestJS (with a Todo example).
+A lightweight full-stack SSR starter with Vue 3, NestJS, Fastify, PrimeVue, and Rsbuild.
 
 ## Tech Stack
 
@@ -43,8 +43,6 @@ src/shared/ # Shared code for frontend and backend
 ```
 
 ## TODO
-
-- PrimeVue components currently use named imports (e.g. `import { Button } from 'primevue'`) as a workaround for an Rsbuild ESM default export issue caused by its internal ESM runner. This only affects the dev environment. Once the upstream fix lands, remove these explicit named imports from Vue components and rely on auto-imports instead. Tracking: https://github.com/web-infra-dev/rsbuild/issues/7277
 
 - The project currently suffers from a FOUC (Flash of Unstyled Content) issue during SSR. PrimeVue styles are not inlined at server render time, causing a visible style flash on first load. This needs to be resolved upstream by the PrimeVue community. Tracking: https://github.com/primefaces/primevue/issues/7289, https://github.com/primefaces/primevue/issues/8044
 

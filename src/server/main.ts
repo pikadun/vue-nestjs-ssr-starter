@@ -1,9 +1,11 @@
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
-import { Logger } from "@nestjs/common";
-import { config } from "./config";
 import path from "node:path";
+
+import { Logger } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
+
+import { AppModule } from "./app.module";
+import { config } from "./config";
 import { STATIC_NAME } from "./constant";
 
 const logger = new Logger("Main");

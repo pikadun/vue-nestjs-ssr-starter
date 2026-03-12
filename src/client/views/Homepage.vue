@@ -9,9 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
 import { AppRouteName } from "@shared/routes";
-import { Button } from "primevue";
+import { useRouter } from "vue-router";
 
 defineOptions({
     name: "HomepageView",

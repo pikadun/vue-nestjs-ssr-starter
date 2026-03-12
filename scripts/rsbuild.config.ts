@@ -1,7 +1,7 @@
+import { PrimeVueResolver } from "@primevue/auto-import-resolver";
 import { defineConfig, type EnvironmentConfig } from "@rsbuild/core";
 import { pluginVue as PluginVue } from "@rsbuild/plugin-vue";
 import PluginAutoImport from "unplugin-vue-components/rspack";
-import { PrimeVueResolver } from "@primevue/auto-import-resolver";
 
 import pkg from "../package.json" with { type: "json" };
 import {

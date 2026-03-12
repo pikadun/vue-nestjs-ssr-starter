@@ -1,6 +1,5 @@
-import { createRouter, createWebHistory, createMemoryHistory } from "vue-router";
-import type { RouteRecordRaw, Router } from "vue-router";
-import { AppRouteName, APP_ROUTES } from "@shared/routes";
+import { APP_ROUTES, AppRouteName } from "@shared/routes";
+import { createMemoryHistory, createRouter, createWebHistory, type Router, type RouteRecordRaw } from "vue-router";
 
 const componentMap: Record<Exclude<AppRouteName, AppRouteName.CatchAll>, () => Promise<unknown>> = {
     [AppRouteName.Home]: () => import("./views/Homepage.vue"),

@@ -1,7 +1,8 @@
-import { type Config, ProductionConfig } from "./production.config";
-import { DevelopmentConfig } from "./development.config";
-import { AppEnv } from "../utils/env";
 import deepmerge from "deepmerge";
+
+import { AppEnv } from "../utils/env";
+import { DevelopmentConfig } from "./development.config";
+import { type Config, ProductionConfig } from "./production.config";
 
 let config = ProductionConfig;
 
